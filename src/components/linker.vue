@@ -1,5 +1,5 @@
 <template>
-  <a v-if="isWx" :href="'/pages' + href">{{text}}</a>
+  <a v-if="isWx" :href="'/pages' + href + '/main'">{{text}}</a>
   <router-link v-else :to="href">{{text}}</router-link>
 </template>
 

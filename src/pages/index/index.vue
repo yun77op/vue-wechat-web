@@ -1,25 +1,18 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
 
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
-      </div>
-    </div>
+    <tabs>
+        <tab name="First tab">
+            This is the content of the first tab
+        </tab>
 
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
+        <tab name="Second tab">
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+        </tab>
+    </tabs>
 
-    <form class="form-container">
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-
-    <linker href="/logs" text="link to logs page" />
+    <!-- <linker href="/logs" text="link to logs page" /> -->
   </div>
 </template>
 
@@ -27,6 +20,9 @@
 import card from '@/components/card'
 import wx from 'wx'
 import linker from '@/components/linker'
+// import {Tab} from '@/components/tabs'
+import Tabs from '@/components/tabs/components/Tabs'
+import Tab from '@/components/tabs/components/Tab'
 
 export default {
   data () {
@@ -38,10 +34,16 @@ export default {
 
   components: {
     card,
-    linker
+    linker,
+    Tab,
+    Tabs
   },
 
   methods: {
+
+    onClick() {
+      console.log('onclick');
+    },
     bindViewTap () {
       const url = '../logs/main'
       wx.navigateTo({ url })
@@ -66,7 +68,6 @@ export default {
   created () {
     // 调用应用实例的方法获取全局数据
     this.getUserInfo()
-    console.log('sdf')
   }
 }
 </script>

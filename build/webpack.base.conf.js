@@ -42,22 +42,22 @@ const webpackBaseConfig = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': args.platform === 'web' ? 'vue' : 'mpvue',
-      'wx': resolve('src/utils/wx-web'),
+      'wx': args.platform === 'web' ? resolve('src/utils/wx-web') : resolve('src/utils/wx'),
       '@': resolve('src')
     },
     symlinks: false
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
+      // {
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   include: [resolve('src'), resolve('test')],
+      //   options: {
+      //     formatter: require('eslint-friendly-formatter')
+      //   }
+      // },
       {
         test: /\.vue$/,
         loader: args.platform === 'web' ? 'vue-loader' : 'mpvue-loader',

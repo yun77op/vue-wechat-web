@@ -19,6 +19,15 @@ wx.setStorageSync = (name, value) => {
   }
 }
 
+wx.removeStorageSync = (name) => {
+  try {
+    window.localStorage.removeItem(name)
+  } catch (e) {
+
+  }
+}
+
+
 wx.login = ({success}) => {
 
 }
