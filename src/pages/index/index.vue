@@ -12,7 +12,7 @@
         </tab>
     </tabs>
 
-    <!-- <linker href="/logs" text="link to logs page" /> -->
+     <!--  <linker href="/logs" text="link to logs page" /> -->
   </div>
 </template>
 

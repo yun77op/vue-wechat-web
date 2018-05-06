@@ -8,15 +8,8 @@
                 class="tabs-component-tab"
                 role="presentation"
                 v-show="tab.isVisible"
-            >
-                <a
-                   :aria-controls="tab.hash"
-                   :aria-selected="tab.isActive"
                    @click="selectTab(tab.hash, $event)"
-                   :href="tab.hash"
-                   class="tabs-component-tab-a"
-                   role="tab"
-                >{{tab.header}}</a>
+            >{{tab.header}}
             </li>
         </ul>
         <div class="tabs-component-panels">
@@ -53,6 +46,8 @@
         // },
 
         created() {
+            
+            
         },
 
         mounted() {
@@ -70,11 +65,9 @@
                 hash: child.hash,
                 header: child.header
               }
-            })
+            });
 
-            if (this.tabs.length) {
-                this.selectTab(this.tabs[0].hash);
-            }
+            this.selectTab(this.tabs[0].hash);
         },
         methods: {
             findTab(hash) {
@@ -86,6 +79,7 @@
                 //     event.preventDefault();
                 // }
 
+
                 const selectedTab = this.findTab(selectedTabHash);
                 if (! selectedTab) {
                     return;
@@ -93,11 +87,12 @@
                 if (selectedTab.isDisabled) {
                     return;
                 }
-                this.tabs.forEach((tab, index) => {
-                    // this.$children[index].isActive = (tab.hash === selectedTab.hash);
 
-                    console.log('isActive', this.$children[index].isActive)
+                this.tabs.forEach((tab, index) => {
+                    this.$children[index].isActive = (tab.hash === selectedTab.hash);
+                    console.log('isActive', this.$children[index])
                 });
+
                 // this.$emit('changed', { tab: selectedTab });
                 this.activeTabHash = selectedTab.hash;
                 // expiringStorage.set(this.storageKey, selectedTab.hash, this.cacheLifetime);

@@ -21,13 +21,17 @@
             isDisabled:{ default: false },
         },
         data: () => ({
-            isActive: true,
+            isActive: false,
             isVisible: true,
         }),
 
         mounted() {
-          // this.isActive = true;
-          console.log(this.isActive);
+
+            // setTimeout(() => {
+            //     if (this.name === 'First tab') {
+            //         this.isActive = true;
+            //     }
+            // }, 1000)
         },
         computed: {
             header() {
