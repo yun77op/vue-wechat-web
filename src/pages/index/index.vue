@@ -4,6 +4,46 @@
     <tabs>
         <tab name="First tab">
             This is the content of the first tab
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            This is the content of the second tab
+            <button @click="onClick">Button</button>
+            <div>This is the content of the second tab</div>
+            <button @click="onClick">Button</button>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
+            <div>This is the content of the second tab</div>
         </tab>
 
         <tab name="Second tab">
@@ -31,12 +71,17 @@ export default {
       userInfo: {}
     }
   },
+  name: 'indexPage',
 
   components: {
     card,
     linker,
     Tab,
     Tabs
+  },
+
+  onPageScroll() {
+    console.log("page scroll");
   },
 
   methods: {
@@ -68,6 +113,8 @@ export default {
   created () {
     // 调用应用实例的方法获取全局数据
     this.getUserInfo()
+
+    console.log('page created')
   }
 }
 </script>
