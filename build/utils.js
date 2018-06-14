@@ -1,6 +1,7 @@
 var path = require('path')
 var config = require('../config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var args = require('optimist').argv;
 
 exports.assetsPath = function (_path) {
   var assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -38,6 +39,10 @@ exports.cssLoaders = function (options) {
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     var loaders = [cssLoader, px2rpxLoader, postcssLoader]
+    if (args.platform === 'web') {
+      loaders.splice(1)
+    }
+
     if (loader) {
       loaders.push({
         loader: loader + '-loader',

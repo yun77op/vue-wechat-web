@@ -1,10 +1,10 @@
 import VueRouter from 'vue-router'
 import PageIndex from './pages/index'
-import PageLogs from './pages/logs'
+import PageDetail from './pages/detail'
 
 const routes = [
   { path: '/', component: PageIndex },
-  { path: '/logs', component: PageLogs }
+  { path: '/detail', component: PageDetail }
 ]
 
 const router = new VueRouter({

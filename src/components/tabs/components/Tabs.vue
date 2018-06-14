@@ -46,8 +46,8 @@
         // },
 
         created() {
-            
-            
+
+
         },
 
         mounted() {
@@ -90,7 +90,6 @@
 
                 this.tabs.forEach((tab, index) => {
                     this.$children[index].isActive = (tab.hash === selectedTab.hash);
-                    console.log('isActive', this.$children[index])
                 });
 
                 // this.$emit('changed', { tab: selectedTab });
@@ -120,12 +119,18 @@
 </script>
 
 
-<style >
+<style scoped>
+.tabs-component {
+  width: 100%;
+}
 .tabs-component-tabs {
   display: flex;
+  width: 100%;
+  padding-left: 0;
 }
 
 .tabs-component-tab {
   flex-grow: 1;
+  list-style: none;
 }
 </style>

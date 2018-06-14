@@ -1,68 +1,32 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
-
+    <div>活动介绍</div>
+    <img class="banner" src="/static/activity-banner.png" />
     <tabs>
-        <tab name="First tab">
-            This is the content of the first tab
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
-            <div>This is the content of the second tab</div>
-            <button @click="onClick">Button</button>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
-            <div>This is the content of the second tab</div>
+        <tab name="列表">
+            <div>
+                <div :key="item.id" v-for="item in list">
+                  <linker href="/detail" :text="item.nickName" />
+                </div>
+            </div>
         </tab>
+        <tab name="规则">
+          <div>这是规则</div>
 
-        <tab name="Second tab">
-            This is the content of the second tab
-            <button @click="onClick">Button</button>
+          <button @click="showToast">toast</button>
+
         </tab>
     </tabs>
-
-     <!--  <linker href="/logs" text="link to logs page" /> -->
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
 import wx from 'wx'
 import linker from '@/components/linker'
 // import {Tab} from '@/components/tabs'
 import Tabs from '@/components/tabs/components/Tabs'
 import Tab from '@/components/tabs/components/Tab'
+import ListItem from '@/components/ListItem'
 
 export default {
   data () {
@@ -71,13 +35,17 @@ export default {
       userInfo: {}
     }
   },
+  computed: {
+    list() {
+      return this.$store.state.work.list
+    }
+  },
   name: 'indexPage',
-
   components: {
-    card,
     linker,
     Tab,
-    Tabs
+    Tabs,
+    ListItem
   },
 
   onPageScroll() {
@@ -85,13 +53,12 @@ export default {
   },
 
   methods: {
-
-    onClick() {
-      console.log('onclick');
-    },
-    bindViewTap () {
-      const url = '../logs/main'
-      wx.navigateTo({ url })
+    showToast () {
+      wx.showToast({
+        title: '成功',
+        icon: 'success',
+        duration: 2000
+      })
     },
     getUserInfo () {
       // 调用登录接口
@@ -106,20 +73,39 @@ export default {
       })
     },
     clickHandle (msg, ev) {
-      console.log('clickHandle:', msg, ev)
     }
+  },
+
+  mounted() {
+    this.$store.dispatch('getWorkList', {
+      activityId: '5226882625660152610'
+    })
+  },
+
+  onReachBottom() {
+    this.$store.dispatch('getWorkList', {
+      activityId: '5226882625660152610'
+    })
   },
 
   created () {
     // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
-
-    console.log('page created')
   }
 }
 </script>
 
-<style scoped>
+<style>
+.tabs-component-tab {
+  text-align: center;
+}
+</style>
+
+
+<style >
+.banner {
+  width: 100%;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
