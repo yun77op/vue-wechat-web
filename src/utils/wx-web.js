@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Toast from '../components/Toast'
+import Modal from '../components/Modal'
 import Vue from 'vue'
 
 const wx = {}
@@ -62,6 +63,35 @@ wx.showToast = (options) => {
     })
     document.body.appendChild(toast.$el)
   }
+}
+
+
+let modal
+
+wx.showModal = (options) => {
+  if (modal) {
+    Object.assign(modal.vm, {
+      visible: true,
+      ...options
+    })
+  } else {
+    const ModalConstructor = Vue.extend(Modal)
+
+    modal = new ModalConstructor({})
+    modal.$on('update:visible', (value) => {
+      modal.vm.visible = value
+    })
+    modal.vm = modal.$mount()
+    Object.assign(modal.vm, {
+      visible: true,
+      ...options
+    })
+    document.body.appendChild(modal.$el)
+  }
+}
+
+wx.setNavigationBarTitle = ({title}) => {
+  document.title = title
 }
 
 export default wx

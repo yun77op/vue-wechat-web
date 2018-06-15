@@ -11,10 +11,12 @@
             </div>
         </tab>
         <tab name="规则">
-          <div>这是规则</div>
+          <template slot="main">
+            <div>这是规则</div>
 
-          <button @click="showToast">toast</button>
-
+            <button @click="showToast">toast</button>
+            <button @click="showModal">modal</button>
+          </template>
         </tab>
     </tabs>
   </div>
@@ -58,6 +60,12 @@ export default {
         title: '成功',
         icon: 'success',
         duration: 2000
+      })
+    },
+    showModal () {
+      wx.showModal({
+        title: '成功',
+        content: '是快递费'
       })
     },
     getUserInfo () {

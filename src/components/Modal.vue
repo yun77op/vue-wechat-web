@@ -1,7 +1,12 @@
 <template>
   <div v-show="visible" class="modal">
-    <div class="modal__content">
+    <div class="modal__body">
       <div class="modal__title">{{title}}</div>
+      <div class="modal__content">{{content}}</div>
+      <div class="modal__button-container">
+        <button class="modal__button modal__button--cancel" type="button" @click="onCancel" v-if="showCancel">{{cancelText}}</button>
+        <button class="modal__button" type="button" @click="onConfirm">{{confirmText}}</button>
+      </div>
     </div>
   </div>
 </template>
@@ -9,9 +14,9 @@
 <script>
 export default {
   props: {
-    duration: {
-      type: Number,
-      default: 1500
+    visible: {
+      type: Boolean,
+      default: false
     },
     title: {
       type: String
@@ -23,23 +28,32 @@ export default {
       type: Boolean,
       default: true
     },
+    confirmText: {
+      type: String,
+      default: '确定'
+    },
     cancelText: {
       type: String,
       default: '取消'
     }
   },
-  watch: {
-    visible(value) {
-      if (value) {
-        setTimeout(() => {
-          this.$emit('update:visible', false)
-        }, this.duration)
-      }
-    }
-  },
   data() {
     return {
 
+    }
+  },
+  methods: {
+    onConfirm() {
+      if (typeof this.success === 'function') {
+        this.success()
+      }
+      this.close()
+    },
+    onCancel() {
+      this.close()
+    },
+    close() {
+      this.$emit('update:visible', false)
     }
   }
 }
@@ -56,14 +70,36 @@ export default {
     bottom: 0;
     justify-content: center;
     align-items: center;
-  }
-  .modal__content {
-    padding: 10px 20px;
-    border-radius: 10px;
     background: rgba(0,0,0,.6);
   }
+  .modal__body {
+    background: #fff;
+    width: 70vw;
+  }
   .modal__title {
-    color: #fff;
+    color: #000;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .modal__content {
+    color: #999;
+    text-align: center;
+  }
+  .modal__button-container {
+    border-top: 1px solid #999;
+    display: flex;
+    margin-top: 20px;
+  }
+  .modal__button {
+    text-align: center;
+    flex-grow: 1;
+    color: #000;
+    padding: 10px 0;
+    border: none;
+    background: #fff;
+  }
+  .modal__button--cancel {
+    border-right: 1px solid #999;
   }
 </style>
 

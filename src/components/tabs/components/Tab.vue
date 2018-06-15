@@ -6,6 +6,7 @@
              role="tabpanel"
               >
         <slot />
+        <slot name="main" v-bind:name1="name"></slot>
     </div>
 </template>
 
