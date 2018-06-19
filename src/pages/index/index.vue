@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @click="clickHandle('test click', $event)">
+  <div class="container">
     <div>活动介绍</div>
     <img class="banner" src="/static/activity-banner.png" />
     <tabs>
@@ -16,6 +16,8 @@
 
             <button @click="showToast">toast</button>
             <button @click="showModal">modal</button>
+
+            <switch2 :checked.sync="switchChecked" />
           </template>
         </tab>
     </tabs>
@@ -25,16 +27,19 @@
 <script>
 import wx from 'wx'
 import linker from '@/components/linker'
+import WeuiDistpciker from 'weui-distpicker'
 // import {Tab} from '@/components/tabs'
 import Tabs from '@/components/tabs/components/Tabs'
 import Tab from '@/components/tabs/components/Tab'
 import ListItem from '@/components/ListItem'
+import Switch from '@/components/Switch'
 
 export default {
   data () {
     return {
       motto: 'Hello World',
-      userInfo: {}
+      userInfo: {},
+      switchChecked: false
     }
   },
   computed: {
@@ -47,7 +52,9 @@ export default {
     linker,
     Tab,
     Tabs,
-    ListItem
+    ListItem,
+    WeuiDistpciker,
+    Switch2: Switch
   },
 
   onPageScroll() {
@@ -68,18 +75,6 @@ export default {
         content: '是快递费'
       })
     },
-    getUserInfo () {
-      // 调用登录接口
-      wx.login({
-        success: () => {
-          wx.getUserInfo({
-            success: (res) => {
-              this.userInfo = res.userInfo
-            }
-          })
-        }
-      })
-    },
     clickHandle (msg, ev) {
     }
   },
@@ -94,10 +89,6 @@ export default {
     this.$store.dispatch('getWorkList', {
       activityId: '5226882625660152610'
     })
-  },
-
-  created () {
-    // 调用应用实例的方法获取全局数据
   }
 }
 </script>
